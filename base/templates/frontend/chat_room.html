@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="{% static 'frontend/styles/chat.css' %}">
+    <style>
+        /* Add header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-content {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .username {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="username">Hi, <span id="username"></span></div>
+        </div>
+        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+
+    <div class="chat-container">
+        <!-- Left Sidebar: Users List -->
+        <div class="users-list">
+            <h2>Active Users</h2>
+            <ul id="users-list">
+                <!-- Dynamically populated users -->
+            </ul>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="chat-area">
+            <div class="chat-prompt" id="chat-prompt">
+                Select a user from the sidebar<br>
+                to start your conversation 💬
+            </div>
+            
+            <div class="chat-history" id="chat-history" style="display: none;">
+                <div class="message-container" id="message-container">
+                    <!-- Messages will be injected here -->
+                </div>
+                
+                <div class="message-input">
+                    <textarea 
+                        id="message-input" 
+                        placeholder="Type a message..." 
+                        rows="1"
+                        oninput="autoResize(this)"
+                    ></textarea>
+                    <button class="send-btn" onclick="handleSendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <script src="{% static 'frontend/scripts/chat.js' %}"></script>
+</body>
+</html>
