@@ -1,0 +1,57 @@
+// Handle login form submission
+document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('/api/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            window.location.href = '/chat/';  // Redirect to chat page
+        } else {
+            document.getElementById('error-message').textContent = data.error || 'Login failed';
+        }
+    } catch (error) {
+        document.getElementById('error-message').textContent = 'An error occurred. Please try again.';
+    }
+});
+
+// Handle signup form submission
+document.getElementById('signup-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    if (password !== confirmPassword) {
+        document.getElementById('error-message').textContent = 'Passwords do not match';
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/signup/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            window.location.href = '/login/';  // Redirect to login page
+        } else {
+            document.getElementById('error-message').textContent = data.error || 'Signup failed';
+        }
+    } catch (error) {
+        document.getElementById('error-message').textContent = 'An error occurred. Please try again.';
+    }
+});

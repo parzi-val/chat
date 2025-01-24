@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'base'
 ]
 
 MIDDLEWARE = [
@@ -110,6 +112,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+LOGIN_REDIRECT_URL = '/chat/' 
 
 
 # Static files (CSS, JavaScript, Images)
